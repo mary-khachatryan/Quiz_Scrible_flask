@@ -1,0 +1,15 @@
+{%extends "simple_layout.html"%}
+
+{% block title %} {{title}} {% endblock title%}
+{% block header%} {{header}} {% endblock header %}
+
+{% block content %}
+<form action = "" method = "post">
+    {{ form.csrf_token}}
+
+    <div>
+        {{form.question.label}}
+        <span class="error">{{ form.question.errors | join("|")}}</span>
+        {{ form.question}}
+    </div>
+{% endblock content %}
