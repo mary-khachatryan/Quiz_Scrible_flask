@@ -14,11 +14,6 @@ def quiz_form():
     form = Quiz_Form()
     if form.validate_on_submit():
         result = request.form
-        return redirect(url_for('form_handle'))#render_template('form_handler.html', title="youtube", handler='handler', result=result)
-    
+        return render_template('form_handler.html', title="youtube", handler='handler', result=result)
     return render_template('form.html', title='title', header='header2', form=form)
     
-@app.route('/form_handler')
-def form_handle():
-   
-   return "<h1>Head</h1>"#render_template ('form_handler.html')
