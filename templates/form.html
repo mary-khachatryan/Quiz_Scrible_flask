@@ -4,12 +4,25 @@
 {% block header%} {{header}} {% endblock header %}
 
 {% block content %}
-<form action = "" method = "post">
-    {{ form.csrf_token}}
+<h2>question</h2>
 
-    <div>
-        {{form.question.label}}
-        <span class="error">{{ form.question.errors | join("|")}}</span>
-        {{ form.question}}
-    </div>
+<form action = "" method = "post">
+   
+
+    <input type="radio" name="lname" value="">
+    <label for="1">11</label>
+    <br>
+    <input type="radio" name="lname" value="">
+    <label for="2">22</label>
+    <br>
+    <input type="radio" name="lname" value="">
+    <label for="3">33</label>
+    <br>
+    <input type="radio" name="lname" value="">
+    <label for="4">44</label>
+  <br>
+  <br>
+  <input type="submit" name="next_button" value="Next">
+</form> 
+
 {% endblock content %}
