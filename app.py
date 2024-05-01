@@ -22,11 +22,7 @@ def home():
         #return render_template('form.html')\
         #return render_template('form.html', title="kov", handler='handler')
     return render_template('home.html', title="youtube", handler='handler')
-    # if form.validate_on_submit():
-    #     print("val")
-    #     return redirect(url_for('a'))
-    # return render_template('home.html', title="youtube", handler='handler', form=form, result=result)
-
+    
 @app.route('/a', methods=['GET', 'POST'])
 def quiz_form():
     form = Quiz_Form()
@@ -35,8 +31,3 @@ def quiz_form():
         return render_template('form_handler.html', title="youtube", handler='handler', result=result)
     return render_template('form.html', title='title', header='header2', form=form)
 
-#  if request.method == 'POST':
-#         if 'next_button' in request.form:
-#             print("val")
-#             return redirect(url_for('a'))
-#     return render_template('home.html', title="youtube", handler='handler')
