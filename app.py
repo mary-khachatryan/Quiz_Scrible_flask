@@ -32,11 +32,11 @@ def home():
         subdirectories = ["Quiz_Scrible_flask"]
         file_name = f"{youtube_id}.json"
         #answer_name = f"{player_name}_answer.txt"
-        file_path = os.path.join(directory, *subdirectories, file_name)
+        home.file_path = os.path.join(directory, *subdirectories, file_name)
         #answer_path = os.path.join(directory, *subdirectories, answer_name)
-        if os.path.exists(file_path):
-            with open(file_path,'r') as f:
-                quiz_Text = json.load(f)
+        if os.path.exists(home.file_path):
+            with open(home.file_path,'r') as f:
+                home.quiz_Text = json.load(f)
         else:
             dictSubtitle = YouTubeTranscriptApi.get_transcript(youtube_id) 
             general_text = " ".join(i['text'] for i in dictSubtitle)
@@ -51,11 +51,11 @@ def home():
             ]
             )
             quizfile_json = json.loads(completion.choices[0].message.content)
-            with open(file_path, "w") as json_file:
+            with open(home.file_path, "w") as json_file:
                 json.dump(quizfile_json, json_file)
       
-            with open(file_path, "r") as json_file:
-                quiz_Text = json.load(json_file)
+            with open(home.file_path, "r") as json_file:
+                home.quiz_Text = json.load(json_file)
 
     # question_text = str(int_num_question+1) + ". " + quiz_Text["questions"][int_num_question]["question"]
     # answer = quiz_Text["questions"][int_num_question]["correct"]
@@ -80,9 +80,9 @@ def home():
     
 @app.route('/a', methods=['GET', 'POST'])
 def quiz_form():
-    form = Quiz_Form()
     if 'next_button' in request.form and request.method == 'POST':
-        result = request.form
-        return render_template('form_handler.html', title="youtube", handler='handler', result=result)
-    return render_template('form.html', title='title', header='header2', form=form)
+     print("asd",home.quiz_Text)
+     return render_template('form_handler.html', title="youtube", handler='handler')
+    return render_template('form.html', title='title', header='header2',quiz_text = home.quiz_Text)
 
+ 

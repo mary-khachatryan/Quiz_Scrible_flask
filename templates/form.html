@@ -1,28 +1,26 @@
-{%extends "simple_layout.html"%}
+{% extends "simple_layout.html" %}
 
-{% block title %} {{title}} {% endblock title%}
-{% block header%} {{header}} {% endblock header %}
+{% block title %} {{ title }} {% endblock title %}
+{% block header %} {{ header }} {% endblock header %}
 
 {% block content %}
-<h2>question</h2>
-
-<form action = "" method = "post">
-   
-
-    <input type="radio" name="lname" value="">
-    <label for="1">11</label>
+<form action="" method="post">
+    {% for i in range(10) %}
+    <h2>{{ quiz_text["questions"][i]["question"] }}</h2>
+    <input type="radio" name="answer" value="A">
+    <label for="1">{{ quiz_text["questions"][i]["A"] }}</label>
     <br>
-    <input type="radio" name="lname" value="">
-    <label for="2">22</label>
+    <input type="radio" name="answer" value="B">
+    <label for="2">{{ quiz_text["questions"][i]["B"] }}</label>
     <br>
-    <input type="radio" name="lname" value="">
-    <label for="3">33</label>
+    <input type="radio" name="answer" value="C">
+    <label for="3">{{ quiz_text["questions"][i]["C"] }}</label>
     <br>
-    <input type="radio" name="lname" value="">
-    <label for="4">44</label>
-  <br>
-  <br>
-  <input type="submit" name="next_button" value="Next">
-</form> 
-
+    <input type="radio" name="answer" value="D">
+    <label for="4">{{ quiz_text["questions"][i]["D"] }}</label>
+    <br>
+    <br>
+    {% endfor %}
+    <input type="submit" name="next_button" value="Next">
+</form>
 {% endblock content %}
