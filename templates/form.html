@@ -6,18 +6,20 @@
 {% block content %}
 <form action="" method="post">
     {% for i in range(10) %}
+    <fieldset id="group{{i}}">
     <h2>{{ quiz_text["questions"][i]["question"] }}</h2>
-    <input type="radio" name="answer" value="A">
+    <input type="radio" name="group{{i}}" value="A">
     <label for="1">{{ quiz_text["questions"][i]["A"] }}</label>
     <br>
-    <input type="radio" name="answer" value="B">
+    <input type="radio" name="group{{i}}" value="B">
     <label for="2">{{ quiz_text["questions"][i]["B"] }}</label>
     <br>
-    <input type="radio" name="answer" value="C">
+    <input type="radio" name="group{{i}}" value="C">
     <label for="3">{{ quiz_text["questions"][i]["C"] }}</label>
     <br>
-    <input type="radio" name="answer" value="D">
+    <input type="radio" name="group{{i}}" value="D">
     <label for="4">{{ quiz_text["questions"][i]["D"] }}</label>
+    </fieldset>
     <br>
     <br>
     {% endfor %}
