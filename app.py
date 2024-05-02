@@ -80,8 +80,15 @@ def home():
     
 @app.route('/a', methods=['GET', 'POST'])
 def quiz_form():
+
     if 'next_button' in request.form and request.method == 'POST':
-     print("asd",home.quiz_Text)
+     #print("asd",home.quiz_Text)
+     for i in range(10):
+            answer = request.form.get('group{}'.format(i))
+            print('group{}'.format(i),"'group'.format(i)",answer)
+            if  answer == None :
+                return render_template('form.html', title='title', header='header2',quiz_text = home.quiz_Text, error_message="Please answer all questions.")
+    
      return render_template('form_handler.html', title="youtube", handler='handler')
     return render_template('form.html', title='title', header='header2',quiz_text = home.quiz_Text)
 
