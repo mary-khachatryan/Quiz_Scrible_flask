@@ -16,49 +16,85 @@
     <h2>{{ quiz_text["questions"][i]["question"] }}</h2>
     {% if answers[i] == "A" %}
     <input type="radio" name="group{{i}}" value="A" checked={{answers[i]}} >
+        {% if answers[i] ==  r_answers[i] %}
+        <label for="1" style="color: green;">{{ quiz_text["questions"][i]["A"] }}</label>
+        {%else%}
+        <label for="1" style="color: red;">{{ quiz_text["questions"][i]["A"] }}</label>
+        {% endif %}
+    {% elif r_answers[i] == "A" %}
+    <input type="radio" name="group{{i}}" value="A">
+    <label for="1" style="color: pink;">{{ quiz_text["questions"][i]["A"] }}</label>
+    
     {% else %}
     <input type="radio" name="group{{i}}" value="A">
+    <label for="1">{{ quiz_text["questions"][i]["A"] }}</label>
     {% endif %} 
-    {% if answers[i] == r_answers[i] %}
-    <!-- <label for="1">{{ quiz_text["questions"][i]["A"] }}</label> -->
-    <label for="1" style="color: green;">{{ quiz_text["questions"][i]["A"] }}</label>
-    {% else %}
-    <label for="1" style="color: red;">{{ quiz_text["questions"][i]["A"] }}</label>
-    {% endif %}
+    
     <br>
 
     {% if answers[i] == "B" %}
     <input type="radio" name="group{{i}}" value="B" checked={{answers[i]}} >
+        {% if answers[i] ==  r_answers[i] %}
+        <label for="2" style="color: green;">{{ quiz_text["questions"][i]["B"] }}</label>
+        {%else%}
+        <label for="2" style="color: red;">{{ quiz_text["questions"][i]["B"] }}</label>
+        {% endif %}
+    {% elif r_answers[i] == "B" %}
+    <input type="radio" name="group{{i}}" value="B">
+    <label for="1" style="color: pink;">{{ quiz_text["questions"][i]["B"] }}</label>
+    
     {% else %}
     <input type="radio" name="group{{i}}" value="B">
-    {% endif %} 
-    
     <label for="2">{{ quiz_text["questions"][i]["B"] }}</label>
+    {% endif %} 
+
     <br>
-
-
     {% if answers[i] == "C" %}
     <input type="radio" name="group{{i}}" value="C" checked={{answers[i]}} >
+        {% if answers[i] ==  r_answers[i] %}
+        <label for="3" style="color: green;">{{ quiz_text["questions"][i]["C"] }}</label>
+        {%else%}
+        <label for="3" style="color: red;">{{ quiz_text["questions"][i]["C"] }}</label>
+        {% endif %}
+    {% elif r_answers[i] == "C" %}
+    <input type="radio" name="group{{i}}" value="C">
+    <label for="3" style="color: pink;">{{ quiz_text["questions"][i]["C"] }}</label>
+    
     {% else %}
     <input type="radio" name="group{{i}}" value="C">
-    {% endif %} 
-    
     <label for="3">{{ quiz_text["questions"][i]["C"] }}</label>
+    {% endif %} 
+
+
+
     <br>
-
-
     {% if answers[i] == "D" %}
     <input type="radio" name="group{{i}}" value="D" checked={{answers[i]}} >
+        {% if answers[i] ==  r_answers[i] %}
+        <label for="4" style="color: green;">{{ quiz_text["questions"][i]["D"] }}</label>
+        {%else%}
+        <label for="4" style="color: red;">{{ quiz_text["questions"][i]["D"] }}</label>
+        {% endif %}
+    {% elif r_answers[i] == "D" %}
+    <input type="radio" name="group{{i}}" value="D">
+    <label for="4" style="color: pink;">{{ quiz_text["questions"][i]["D"] }}</label>
+    
     {% else %}
     <input type="radio" name="group{{i}}" value="D">
-    {% endif %} 
-    
     <label for="4">{{ quiz_text["questions"][i]["D"] }}</label>
-    <br>
+    {% endif %} 
     </fieldset>
     <br>
     <br>
+   
+
+
     {% endfor %}
+    
+
+
+
+
     <input type="submit" name="next_button" value="Next">
     <label for="error">{{ error_message }}</label>
 </form>

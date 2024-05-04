@@ -90,7 +90,7 @@ def quiz_form():
             quiz_form.answers[i] = answer
             answer_count +=1
            
-    if 'next_button' in request.form and request.method == 'POST' and answer_count == 3:
+    if 'next_button' in request.form and request.method == 'POST' and answer_count == 10:
         
         print("yess")
         return redirect('result_page')
