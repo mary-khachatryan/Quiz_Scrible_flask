@@ -81,34 +81,34 @@ def home():
 @app.route('/a', methods=['GET', 'POST'])
 def quiz_form():
     answer_count = 0
-    answers =["None","None","None","None","None","None","None","None","None","None",]
+    quiz_form.answers =["None","None","None","None","None","None","None","None","None","None",]
     for i in range(10):
         answer = request.form.get('group{}'.format(i))
         
         print('group{}'.format(i),"'group'.format(i)",answer)
         if  answer != None :
-            answers[i] = answer
+            quiz_form.answers[i] = answer
             answer_count +=1
            
-    if 'next_button' in request.form and request.method == 'POST' and answer_count == 10:
-        return render_template('form_handler.html', title="youtube", handler='handler')
+    if 'next_button' in request.form and request.method == 'POST' and answer_count == 3:
+        
+        print("yess")
+        return redirect('result_page')
     else: 
-         
+        return render_template('form.html', title='title', header='header2',quiz_text = home.quiz_Text,answers = quiz_form.answers)
+
+
+@app.route('/result_page', methods=['GET', 'POST'])
+def result_pagee():
+    print("asdffggh")
+    right_answers =[]
+    for i in range(10):
+     
+      right_answers.append( home.quiz_Text["questions"][i]["correct"])
+      print(right_answers)
+    return render_template('result.html', title="youtube", handler='handler',quiz_text = home.quiz_Text, r_answers=right_answers, answers= quiz_form.answers)
 
 
 
 
-
-
-    # if 'next_button' in request.form and request.method == 'POST':
-    #  #print("asd",home.quiz_Text)
-    #  for i in range(10):
-    #         answer = request.form.get('group{}'.format(i))
-    #         print('group{}'.format(i),"'group'.format(i)",answer)
-    #         if  answer != None :
-    #             return render_template('form.html', title='title', header='header2',quiz_text = home.quiz_Text, error_message="Please answer all questions.")
-    
-    #  return render_template('form_handler.html', title="youtube", handler='handler')
-        return render_template('form.html', title='title', header='header2',quiz_text = home.quiz_Text,answers = answers)
-    
- 
+#return render_template('result.html', title="youtube", handler='handler')

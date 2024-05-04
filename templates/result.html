@@ -1,0 +1,68 @@
+{% extends "simple_layout.html" %}
+
+{% block title %} {{ title }} {% endblock title %}
+{% block header %} {{ header }} {% endblock header %}
+
+
+
+{% block content %}
+
+
+
+
+<form action="" method="post">
+    {% for i in range(10) %}
+    <fieldset id="group{{i}}">
+    <h2>{{ quiz_text["questions"][i]["question"] }}</h2>
+    {% if answers[i] == "A" %}
+    <input type="radio" name="group{{i}}" value="A" checked={{answers[i]}} >
+    {% else %}
+    <input type="radio" name="group{{i}}" value="A">
+    {% endif %} 
+    {% if answers[i] == r_answers[i] %}
+    <!-- <label for="1">{{ quiz_text["questions"][i]["A"] }}</label> -->
+    <label for="1" style="color: green;">{{ quiz_text["questions"][i]["A"] }}</label>
+    {% else %}
+    <label for="1" style="color: red;">{{ quiz_text["questions"][i]["A"] }}</label>
+    {% endif %}
+    <br>
+
+    {% if answers[i] == "B" %}
+    <input type="radio" name="group{{i}}" value="B" checked={{answers[i]}} >
+    {% else %}
+    <input type="radio" name="group{{i}}" value="B">
+    {% endif %} 
+    
+    <label for="2">{{ quiz_text["questions"][i]["B"] }}</label>
+    <br>
+
+
+    {% if answers[i] == "C" %}
+    <input type="radio" name="group{{i}}" value="C" checked={{answers[i]}} >
+    {% else %}
+    <input type="radio" name="group{{i}}" value="C">
+    {% endif %} 
+    
+    <label for="3">{{ quiz_text["questions"][i]["C"] }}</label>
+    <br>
+
+
+    {% if answers[i] == "D" %}
+    <input type="radio" name="group{{i}}" value="D" checked={{answers[i]}} >
+    {% else %}
+    <input type="radio" name="group{{i}}" value="D">
+    {% endif %} 
+    
+    <label for="4">{{ quiz_text["questions"][i]["D"] }}</label>
+    <br>
+    </fieldset>
+    <br>
+    <br>
+    {% endfor %}
+    <input type="submit" name="next_button" value="Next">
+    <label for="error">{{ error_message }}</label>
+</form>
+
+
+
+{% endblock content %}
