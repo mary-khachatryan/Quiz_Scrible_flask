@@ -2,14 +2,14 @@
 
 {% block title %} {{ title }} {% endblock title %}
 {% block header %} {{ header }} {% endblock header %}
-
+<h2>Your score is {{final_score }} baby</h2>
 
 
 {% block content %}
 
 
 
-
+<h2>Your score is {{final_score }} achon jan</h2>
 <form action="" method="post">
     {% for i in range(10) %}
     <fieldset id="group{{i}}">
@@ -95,7 +95,7 @@
 
 
 
-    <input type="submit" name="next_button" value="Next">
+    <input type="submit" name="try_again" value="Wanna try again?">
     <label for="error">{{ error_message }}</label>
 </form>
 

@@ -1,4 +1,4 @@
-from radio_buttons import Quiz_Form,MyForm
+
 from flask import Flask, render_template,url_for, request,redirect
 
 import openai
@@ -13,11 +13,6 @@ app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "11_509"
 
-# @app.route("/")
-# def myredirect():
-#     return redirect(url_for('quiz_form'))
-
-
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -31,9 +26,9 @@ def home():
         directory = ".."  # Root directory
         subdirectories = ["Quiz_Scrible_flask"]
         file_name = f"{youtube_id}.json"
-        #answer_name = f"{player_name}_answer.txt"
+        
         home.file_path = os.path.join(directory, *subdirectories, file_name)
-        #answer_path = os.path.join(directory, *subdirectories, answer_name)
+        
         if os.path.exists(home.file_path):
             with open(home.file_path,'r') as f:
                 home.quiz_Text = json.load(f)
@@ -57,25 +52,10 @@ def home():
             with open(home.file_path, "r") as json_file:
                 home.quiz_Text = json.load(json_file)
 
-    # question_text = str(int_num_question+1) + ". " + quiz_Text["questions"][int_num_question]["question"]
-    # answer = quiz_Text["questions"][int_num_question]["correct"]
-    # option = st.radio(label= question_text,options = (quiz_Text["questions"][int_num_question]["A"], quiz_Text["questions"][int_num_question]["B"], quiz_Text["questions"][int_num_question]["C"], quiz_Text["questions"][int_num_question]["D"])
-    # )           
-
-
-
-
-
-
-
-
-
-
+  
         print("id", youtube_id)
         return redirect('a')
-        #return render_template('form_handler.html', title="youtube", handler='handler', result=result)
-        #return render_template('form.html')\
-        #return render_template('form.html', title="kov", handler='handler')
+        
     return render_template('home.html', title="youtube", handler='handler')
     
 @app.route('/a', methods=['GET', 'POST'])
@@ -101,12 +81,18 @@ def quiz_form():
 @app.route('/result_page', methods=['GET', 'POST'])
 def result_pagee():
     print("asdffggh")
+    final_score = 0
     right_answers =[]
     for i in range(10):
      
       right_answers.append( home.quiz_Text["questions"][i]["correct"])
+      if right_answers[i] ==  quiz_form.answers[i]:
+          final_score +=1
       print(right_answers)
-    return render_template('result.html', title="youtube", handler='handler',quiz_text = home.quiz_Text, r_answers=right_answers, answers= quiz_form.answers)
+    if 'try_again' in request.form and request.method == 'POST':
+        print("yess")
+        return redirect(url_for("home"))
+    return render_template('result.html', title="youtube", handler='handler',quiz_text = home.quiz_Text, r_answers=right_answers, answers= quiz_form.answers,final_score = final_score)
 
 
 

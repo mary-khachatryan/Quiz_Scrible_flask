@@ -1,9 +1,13 @@
 {% extends "simple_layout.html" %}
 
+
+
+
 {% block title %} {{ title }} {% endblock title %}
 {% block header %} {{ header }} {% endblock header %}
 
 {% block content %}
+
 <form action="" method="post">
     {% for i in range(10) %}
     <fieldset id="group{{i}}">
