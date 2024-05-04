@@ -41,7 +41,7 @@ def home():
             completion = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-            {"role": "system", "content": f"I am sending you a text.you MUST represent 10 quetion,the questions and  send answers as json file.  which qontainn keys and values like: \"qeuestion\",\"A\":answer,\"B\":answer,\"C\":answer,\"D\":answer, correct: same  answer which is correct: TEXT{general_text}"},
+            {"role": "system", "content": f"I am sending you a text.you MUST represent 10 quetion,the questions and  send answers as json file.  which qontainn keys and values like:\"questions\": [\"question\": \"What was the name of the ship mentioned in the text?\", \"A\": \"Nina\", \"B\": \"Pinta\", \"C\": \"Santa Maria\", \"D\": \"Annabel\", \"correct\": \"D\", correct: is same  letter  which is correct: TEXT{general_text}"},
             #{"role": "user", "content": f"{generalText}"}
             ]
             )
