@@ -7,7 +7,4 @@ requests==2.31.0
 streamlit==1.33.0
 WTForms==3.1.2
 youtube-transcript-api==0.6.2
-os
-json
-Python
-dotenv
+python-dotenv==0.19.1
