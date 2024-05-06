@@ -23,17 +23,14 @@ app.config["SECRET_KEY"] = "11_509"
 def home():
     youtube_id = request.form.get('Youtube_id')
     if 'next_button' in request.form and request.method == 'POST':
-        print("val")
-
-        #youtube_id = str(request.form.get('fname'))
-        print("IDD",youtube_id)
+ 
 
         directory = ".."  # Root directory
         subdirectories = ["Quiz_Scrible_flask"]
         file_name = f"{youtube_id}.json"
         
         home.file_path = os.path.join(directory, *subdirectories, file_name)
-        
+        print(home.file_path)
         if os.path.exists(home.file_path):
             with open(home.file_path,'r') as f:
                 home.quiz_Text = json.load(f)
@@ -58,7 +55,7 @@ def home():
                 home.quiz_Text = json.load(json_file)
 
   
-        print("id", youtube_id)
+        
         return redirect('a')
         
     return render_template('home.html', title="youtube", handler='handler')
@@ -66,7 +63,7 @@ def home():
 @app.route('/a', methods=['GET', 'POST'])
 def quiz_form():
     answer_count = 0
-    quiz_form.answers =["None","None","None","None","None","None","None","None","None","None",]
+    quiz_form.answers = ["None"] * 10
     for i in range(10):
         answer = request.form.get('group{}'.format(i))
         
@@ -75,9 +72,7 @@ def quiz_form():
             quiz_form.answers[i] = answer
             answer_count +=1
            
-    if 'next_button' in request.form and request.method == 'POST' and answer_count == 10:
-        
-        print("yess")
+    if 'next_button' in request.form and answer_count == 10:
         return redirect('result_page')
     else: 
         return render_template('form.html', title='title', header='header2',quiz_text = home.quiz_Text,answers = quiz_form.answers)
@@ -85,7 +80,7 @@ def quiz_form():
 
 @app.route('/result_page', methods=['GET', 'POST'])
 def result_pagee():
-    print("asdffggh")
+    
     final_score = 0
     right_answers =[]
     for i in range(10):
@@ -93,15 +88,12 @@ def result_pagee():
       right_answers.append( home.quiz_Text["questions"][i]["correct"])
       if right_answers[i] ==  quiz_form.answers[i]:
           final_score +=1
-      print(right_answers)
-    if 'try_again' in request.form and request.method == 'POST':
-        print("yess")
+      
+    if 'try_again' in request.form:
+        
         return redirect(url_for("home"))
     return render_template('result.html', title="youtube", handler='handler',quiz_text = home.quiz_Text, r_answers=right_answers, answers= quiz_form.answers,final_score = final_score)
 
 
-
-
-#return render_template('result.html', title="youtube", handler='handler')
 if __name__ == '__main__':
     app.run()
