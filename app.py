@@ -26,7 +26,7 @@ def home():
  
 
         directory = ".."  # Root directory
-        subdirectories = ["Quiz_Scrible_flask"]
+        subdirectories = ["/opt/render/project/src/"]
         file_name = f"{youtube_id}.json"
         
         home.file_path = os.path.join(directory, *subdirectories, file_name)
