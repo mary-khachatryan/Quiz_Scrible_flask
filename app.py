@@ -7,10 +7,15 @@ from openai import OpenAI
 from youtube_transcript_api import YouTubeTranscriptApi
 import os
 import json
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+client = OpenAI()
 
+load_dotenv()
 
+# Retrieve API key from environment variable
+openai.api_key = os.getenv("OPENAI_API_KEY")
 app.config["SECRET_KEY"] = "11_509"
 
 
