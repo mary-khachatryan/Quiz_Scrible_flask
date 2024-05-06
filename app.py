@@ -103,3 +103,5 @@ def result_pagee():
 
 
 #return render_template('result.html', title="youtube", handler='handler')
+if __name__ == '__main__':
+    app.run()
