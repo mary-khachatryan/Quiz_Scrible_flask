@@ -8,55 +8,75 @@
 
 {% block content %}
 
+
+<style>
+    /* Add your CSS styles here */
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f3f3f3;
+    }
+
+    fieldset {
+        border: none;
+        margin: 10px 0;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+        font-size: 1.2em;
+        color: #333;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    input[type="radio"] {
+        display: inline-block;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 0.9em;
+    }
+</style>
 <form action="" method="post">
     {% for i in range(10) %}
     <fieldset id="group{{i}}">
-    <h2>{{ quiz_text["questions"][i]["question"] }}</h2>
-    
-    {% if answers[i] == "A" %}
-    <input type="radio" name="group{{i}}" value="A" checked={{answers[i]}} >
-    {% else %}
-    <input type="radio" name="group{{i}}" value="A">
-    {% endif %} 
-    
-    <label for="1">{{ quiz_text["questions"][i]["A"] }}</label>
-    <br>
-
-    {% if answers[i] == "B" %}
-    <input type="radio" name="group{{i}}" value="B" checked={{answers[i]}} >
-    {% else %}
-    <input type="radio" name="group{{i}}" value="B">
-    {% endif %} 
-    
-    <label for="2">{{ quiz_text["questions"][i]["B"] }}</label>
-    <br>
-
-
-    {% if answers[i] == "C" %}
-    <input type="radio" name="group{{i}}" value="C" checked={{answers[i]}} >
-    {% else %}
-    <input type="radio" name="group{{i}}" value="C">
-    {% endif %} 
-    
-    <label for="3">{{ quiz_text["questions"][i]["C"] }}</label>
-    <br>
-
-
-    {% if answers[i] == "D" %}
-    <input type="radio" name="group{{i}}" value="D" checked={{answers[i]}} >
-    {% else %}
-    <input type="radio" name="group{{i}}" value="D">
-    {% endif %} 
-    
-    <label for="4">{{ quiz_text["questions"][i]["D"] }}</label>
-    <br>
+        <h2>{{ quiz_text["questions"][i]["question"] }}</h2>
+        
+        {% for option in ["A", "B", "C", "D"] %}
+            <input type="radio" name="group{{i}}" value="{{ option }}" {% if answers[i] == option %} checked {% endif %}>
+            <label>{{ quiz_text["questions"][i][option] }}</label>
+            <br><br>
+        {% endfor %}
+        <br><br>
     </fieldset>
-    <br>
-    <br>
     {% endfor %}
     <input type="submit" name="next_button" value="Next">
-    <label for="error">{{ error_message }}</label>
+    <label class="error-message" for="error">{{ error_message }}</label>
 </form>
+
 
 
 

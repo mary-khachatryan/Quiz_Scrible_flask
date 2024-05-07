@@ -7,9 +7,67 @@
 
 {% block content %}
 
+<style>
+    /* Add your CSS styles here */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 0;
+    }
 
+    form {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
 
-<h2>Your score is {{final_score }} achon jan</h2>
+    fieldset {
+        border: none;
+        margin: 10px 0;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+        font-size: 1.2em;
+        color: #333;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    input[type="radio"] {
+        display: inline-block;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 0.9em;
+    }
+</style>
+
+<h1>Your score is {{final_score }} achon jan</h1>
 <form action="" method="post">
     {% for i in range(10) %}
     <fieldset id="group{{i}}">
@@ -77,7 +135,7 @@
         {% endif %}
     {% elif r_answers[i] == "D" %}
     <input type="radio" name="group{{i}}" value="D">
-    <label for="4" style="color: rgb(155, 207, 153);">{{ quiz_text["questions"][i]["D"] }}</label>
+    <label for="4" style="color: pink;">{{ quiz_text["questions"][i]["D"] }}</label>
     
     {% else %}
     <input type="radio" name="group{{i}}" value="D">

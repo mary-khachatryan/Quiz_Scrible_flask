@@ -24,8 +24,9 @@ def home():
     
 
 
-    home.fav_num = request.form.get('fav_num')
+    
     if 'next_button' in request.form and request.method == 'POST':
+        home.fav_num = request.form.get('fav_num')
         youtube_id = str(request.form.get('Youtube_id'))
         if(youtube_id != None):
             youtube_id = youtube_id[youtube_id.index('=') + 1 : youtube_id.index('=') + 12]
@@ -33,6 +34,7 @@ def home():
 
         directory = ".."  # Root directory
         subdirectories = ["/opt/render/project/src/"]
+        # subdirectories = ["Quiz_Scrible_flask"]
         file_name = f"{youtube_id}.json"
         
         home.file_path = os.path.join(directory, *subdirectories, file_name)
@@ -63,8 +65,10 @@ def home():
                 home.quiz_Text = json.load(json_file)
 
   
-        
-        return redirect('a')
+        if home.fav_num =="509":
+            return redirect('Bayko')
+        else:
+            return redirect('a')
         
     return render_template('home.html', title="Quiz Scrible", handler='handler')
     
@@ -83,7 +87,7 @@ def quiz_form():
     if 'next_button' in request.form and answer_count == 10:
         return redirect('result_page')
     else: 
-        return render_template('form.html', title='title', header='header2',quiz_text = home.quiz_Text,answers = quiz_form.answers)
+        return render_template('form.html', title='title', header='Start Your Quiz Scrible',quiz_text = home.quiz_Text,answers = quiz_form.answers)
 
 
 @app.route('/result_page', methods=['GET', 'POST'])
