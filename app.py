@@ -34,7 +34,7 @@ def home():
         else:
              return render_template('home.html', title="restart", header  ="Please provide a valid YouTube link.")
         directory = ".."  # Root directory
-        subdirectories = ["/opt/render/project/src/"]
+        subdirectories = ["/opt/render/project/src/json"]
         #subdirectories = ["Quiz_Scrible_flask"]
         file_name = f"{youtube_id}.json"
         
