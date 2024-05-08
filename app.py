@@ -4,7 +4,7 @@ from flask import Flask, render_template,url_for, request,redirect
 import openai
 import streamlit as st
 from openai import OpenAI
-from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api import YouTubeTranscriptApi,TranscriptsDisabled
 import os
 import json
 from dotenv import load_dotenv
@@ -34,7 +34,7 @@ def home():
 
         directory = ".."  # Root directory
         subdirectories = ["/opt/render/project/src/"]
-        # subdirectories = ["Quiz_Scrible_flask"]
+        #subdirectories = ["Quiz_Scrible_flask"]
         file_name = f"{youtube_id}.json"
         
         home.file_path = os.path.join(directory, *subdirectories, file_name)
@@ -43,34 +43,44 @@ def home():
             with open(home.file_path,'r') as f:
                 home.quiz_Text = json.load(f)
         else:
-
+            dictSubtitle = None
+            try:
+                dictSubtitle = YouTubeTranscriptApi.get_transcript(youtube_id)
+             
+            except TranscriptsDisabled:
+                    print("Transcripts are disabled for this video.")
+            except Exception as e:
+                    print("An error occurred:", e)
             
-            dictSubtitle = YouTubeTranscriptApi.get_transcript(youtube_id) 
-            general_text = " ".join(i['text'] for i in dictSubtitle)
-            for i in dictSubtitle:
-                general_text += " " + i['text']
-            client = OpenAI()
-            completion = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-            {"role": "system", "content": f"I am sending you a text.you MUST represent 10 quetion,the questions and  send answers as json file.  which qontainn keys and values like that but dont include this example in json:\"questions\": [\"question\": \"What was the name of the ship mentioned in the text?\", \"A\": \"Nina\", \"B\": \"Pinta\", \"C\": \"Santa Maria\", \"D\": \"Annabel\", \"correct\": \"D\", correct: is same  letter  which is correct: TEXT{general_text}"},
+            if(dictSubtitle): 
+                print("dictSubtitle",dictSubtitle)
+                general_text = " ".join(i['text'] for i in dictSubtitle)
+                for i in dictSubtitle:
+                    general_text += " " + i['text']
+                client = OpenAI()
+                completion = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                {"role": "system", "content": f"I am sending you a text.you MUST represent 10 quetion,the questions and  send answers as json file.  which qontainn keys and values like that but dont include this example in json:\"questions\": [\"question\": \"What was the name of the ship mentioned in the text?\", \"A\": \"Nina\", \"B\": \"Pinta\", \"C\": \"Santa Maria\", \"D\": \"Annabel\", \"correct\": \"D\", correct: is same  letter  which is correct: TEXT{general_text}"},
             #{"role": "user", "content": f"{generalText}"}
-            ]
-            )
-            quizfile_json = json.loads(completion.choices[0].message.content)
-            with open(home.file_path, "w") as json_file:
-                json.dump(quizfile_json, json_file)
+                ]
+                )
+                quizfile_json = json.loads(completion.choices[0].message.content)
+                with open(home.file_path, "w") as json_file:
+                    json.dump(quizfile_json, json_file)
       
-            with open(home.file_path, "r") as json_file:
-                home.quiz_Text = json.load(json_file)
+                with open(home.file_path, "r") as json_file:
+                    home.quiz_Text = json.load(json_file)
 
   
-        if home.fav_num =="509":
-            return redirect('Bayko')
-        else:
-            return redirect('a')
-        
-    return render_template('home.html', title="Quiz Scrible", handler='handler')
+                if home.fav_num =="509":
+                    return redirect('Bayko')
+                else:
+                    return redirect('a')
+            else:
+                 print("noneeeeeeeeeee")
+                 return render_template('home.html', title="restart", header  ="Transcripts are disabled for this video.")
+    return render_template('home.html', title="Quiz Scrible" )
     
 @app.route('/a', methods=['GET', 'POST'])
 def quiz_form():
