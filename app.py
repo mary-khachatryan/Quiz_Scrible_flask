@@ -21,17 +21,18 @@ app.config["SECRET_KEY"] = "11_509"
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    
+    id_form = "www.youtube.com/watch?v="
 
 
     
     if 'next_button' in request.form and request.method == 'POST':
         home.fav_num = request.form.get('fav_num')
         youtube_id = str(request.form.get('Youtube_id'))
-        if(youtube_id != None):
+        if(youtube_id != None and id_form in youtube_id):
             youtube_id = youtube_id[youtube_id.index('=') + 1 : youtube_id.index('=') + 12]
             print(youtube_id,"indexasdf")
-
+        else:
+             return render_template('home.html', title="restart", header  ="Please provide a valid YouTube link.")
         directory = ".."  # Root directory
         subdirectories = ["/opt/render/project/src/"]
         #subdirectories = ["Quiz_Scrible_flask"]
