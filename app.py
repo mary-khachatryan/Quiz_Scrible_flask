@@ -32,7 +32,7 @@ def home():
             youtube_id = youtube_id[youtube_id.index('=') + 1 : youtube_id.index('=') + 12]
             print(youtube_id,"indexasdf")
         else:
-             return render_template('home.html', title="restart", header  ="Please provide a valid YouTube link.")
+             return render_template('home.html', title="Quiz Scrible", header  ="Please provide a valid YouTube link.")
         directory = ".."  # Root directory
         subdirectories = ["/opt/render/project/src/json"]
         #subdirectories = ["Quiz_Scrible_flask"]
@@ -80,7 +80,7 @@ def home():
                     return redirect('a')
             else:
                  print("noneeeeeeeeeee")
-                 return render_template('home.html', title="restart", header  ="Transcripts are disabled for this video.")
+                 return render_template('home.html', title="Quiz Scrible", header  ="Transcripts are disabled for this video.")
     return render_template('home.html', title="Quiz Scrible" )
     
 @app.route('/a', methods=['GET', 'POST'])
