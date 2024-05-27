@@ -98,7 +98,7 @@ def quiz_form():
     if 'next_button' in request.form and answer_count == 10:
         return redirect('result_page')
     else: 
-        return render_template('form.html', title='title', header='Start Your Quiz Scrible',quiz_text = home.quiz_Text,answers = quiz_form.answers)
+        return render_template('form.html', title='Quiz Scrible', header='Start Your Quiz Scrible',quiz_text = home.quiz_Text,answers = quiz_form.answers)
 
 
 @app.route('/result_page', methods=['GET', 'POST'])
