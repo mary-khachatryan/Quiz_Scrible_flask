@@ -81,6 +81,7 @@ def home():
             else:
                  print("noneeeeeeeeeee")
                  return render_template('home.html', title="Quiz Scrible", header  ="Transcripts are disabled for this video.")
+        return redirect('a')
     return render_template('home.html', title="Quiz Scrible" )
     
 @app.route('/a', methods=['GET', 'POST'])
