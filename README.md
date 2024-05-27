@@ -7,3 +7,6 @@ Subtitle Detection: QuizScrible checks if the video has subtitles for better qui
 Generate Quiz: Creates quizzes based on the video’s subtitles.
 Take the Quiz: Answer questions to see how well you understood the video.
 Review Answers: Get results for your answers․
+
+
+Project:https://quiz-scrible-flask.onrender.com/
